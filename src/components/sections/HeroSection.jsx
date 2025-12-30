@@ -48,12 +48,12 @@ export const HeroSection = () => {
                 </SwayingFlower>
             </ParallaxElement>
 
-            <div className="absolute top-0 left-0 w-full pointer-events-none z-15">
-                <div className="absolute left-16 md:left-24 top-0">
-                    <MarigoldGarland delay={0} className="h-72 md:h-96 opacity-40" />
+            <div className="absolute top-0 left-0 w-full pointer-events-none z-15 hidden md:block">
+                <div className="absolute left-24 top-0">
+                    <MarigoldGarland delay={0} className="h-96 opacity-40" />
                 </div>
-                <div className="absolute right-16 md:right-24 top-0">
-                    <MarigoldGarland delay={0.15} className="h-56 md:h-72 opacity-40" />
+                <div className="absolute right-24 top-0">
+                    <MarigoldGarland delay={0.15} className="h-72 opacity-40" />
                 </div>
             </div>
 
