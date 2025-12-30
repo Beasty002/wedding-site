@@ -60,7 +60,7 @@ export const HeroSection = () => {
             <motion.div className="absolute top-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 2.5, delay: 1 }}>
                 <Ganesh className="w-16 h-16 md:w-20 md:h-20 text-[#8B7355] opacity-70" />
                 <p className="text-[#8B7355] text-sm md:text-base mt-2 opacity-60" style={{ fontFamily: 'Noto Sans Devanagari, serif' }}>
-                    ॐ श्री गणेशाय नमः
+                    ||  श्री गणेशाय नमः ||
                 </p>
             </motion.div>
 
