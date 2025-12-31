@@ -59,7 +59,11 @@ export const HeroSection = () => {
 
             <motion.div className="absolute top-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 2.5, delay: 1 }}>
                 <Ganesh className="w-16 h-16 md:w-20 md:h-20 text-[#8B7355] opacity-70" />
-                <p className="text-[#8B7355] text-sm md:text-base mt-2 opacity-60" style={{ fontFamily: 'Noto Sans Devanagari, serif' }}>
+                <p className="text-[#8B7355] text-xs md:text-sm mt-2 opacity-60 text-center leading-relaxed" style={{ fontFamily: 'Noto Sans Devanagari, serif' }}>
+                    वक्रतुंड महाकाय सूर्यकोटि समप्रभ।<br />
+                    निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
+                </p>
+                <p className="text-[#8B7355] text-sm md:text-base mt-3 opacity-60" style={{ fontFamily: 'Noto Sans Devanagari, serif' }}>
                     ||  श्री गणेशाय नमः ||
                 </p>
             </motion.div>
