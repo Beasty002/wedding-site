@@ -17,6 +17,22 @@ export function MusicPlayer() {
         };
     }, []);
 
+    useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (document.hidden && audioRef.current && isPlaying) {
+                audioRef.current.pause();
+            } else if (!document.hidden && audioRef.current && isPlaying) {
+                audioRef.current.play();
+            }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
+        return () => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+    }, [isPlaying]);
+
     const togglePlay = () => {
         if (isPlaying) {
             audioRef.current.pause();
