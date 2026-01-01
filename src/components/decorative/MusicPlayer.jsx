@@ -1,21 +1,14 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-export function MusicPlayer() {
+export function MusicPlayer({ audioRef, isInitiallyPlaying }) {
     const [isPlaying, setIsPlaying] = useState(false);
-    const audioRef = useRef(null);
 
     useEffect(() => {
-        audioRef.current = new Audio('/blinksake.mp3');
-        audioRef.current.loop = true;
-
-        return () => {
-            if (audioRef.current) {
-                audioRef.current.pause();
-                audioRef.current = null;
-            }
-        };
-    }, []);
+        if (isInitiallyPlaying && audioRef.current) {
+            setIsPlaying(true);
+        }
+    }, [isInitiallyPlaying, audioRef]);
 
     useEffect(() => {
         const handleVisibilityChange = () => {
@@ -31,9 +24,11 @@ export function MusicPlayer() {
         return () => {
             document.removeEventListener('visibilitychange', handleVisibilityChange);
         };
-    }, [isPlaying]);
+    }, [isPlaying, audioRef]);
 
     const togglePlay = () => {
+        if (!audioRef.current) return;
+
         if (isPlaying) {
             audioRef.current.pause();
             setIsPlaying(false);
@@ -42,6 +37,8 @@ export function MusicPlayer() {
             setIsPlaying(true);
         }
     };
+
+    if (!isInitiallyPlaying) return null;
 
     return (
         <motion.button

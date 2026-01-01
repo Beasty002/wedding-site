@@ -4,12 +4,12 @@ import { MarigoldGarland } from '../decorative/MarigoldGarland';
 import { Ganesh } from '../decorative/Ganesh';
 import { SwayingFlower, BreathingFlower, ParallaxElement } from '../decorative/AnimationWrappers';
 
-const PetalBackground = () => (
+const PetalBackground = ({ hasEntered }) => (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        {[...Array(35)].map((_, i) => (
+        {hasEntered && [...Array(35)].map((_, i) => (
             <FloatingPetal key={i} className="absolute w-4 h-4 md:w-6 md:h-6" delay={i * 0.5} color={i % 3 === 0 ? '#FFB7C5' : i % 3 === 1 ? '#FFE4E1' : '#E6E6FA'} style={{ left: `${Math.random() * 100}%`, top: -50 }} />
         ))}
-        {[...Array(10)].map((_, i) => (
+        {hasEntered && [...Array(10)].map((_, i) => (
             <motion.div key={`leaf-${i}`} className="absolute w-8 h-8 text-[#9DC183] opacity-40" initial={{ x: -100, y: Math.random() * 1000, rotate: 0 }} animate={{ x: '120vw', y: Math.random() * 1000 + 200, rotate: 360 }} transition={{ duration: 20 + Math.random() * 20, repeat: Infinity, ease: 'linear', delay: i * 2 }}>
                 <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12,2C12,2 12,22 12,22C12,22 2,12 2,12C2,12 12,2 12,2Z" />
@@ -20,15 +20,15 @@ const PetalBackground = () => (
     </div>
 );
 
-export const HeroSection = () => {
+export const HeroSection = ({ hasEntered }) => {
     const { scrollY } = useScroll();
     const y = useTransform(scrollY, [0, 500], [0, 200]);
     const opacity = useTransform(scrollY, [0, 800], [1, 0]);
 
     return (
-        <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 py-20 bg-[#FFFFF0]">
+        <section className="relative h-screen flex flex-col items-center overflow-hidden px-4 py-4 bg-[#FFFFF0]">
             <WatercolorWash variant="pink" className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none" />
-            <PetalBackground />
+            <PetalBackground hasEntered={hasEntered} />
 
             <ParallaxElement offset={100} className="absolute top-32 left-4 md:left-12 w-48 h-64 pointer-events-none z-5">
                 <SwayingFlower duration={6} className="origin-top-left">
@@ -57,39 +57,64 @@ export const HeroSection = () => {
                 </div>
             </div>
 
-            <motion.div className="absolute top-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 2.5, delay: 1 }}>
-                <Ganesh className="w-16 h-16 md:w-20 md:h-20 text-[#8B7355] opacity-70" />
-                <p className="text-[#8B7355] text-xs md:text-sm mt-2 opacity-60 text-center leading-relaxed" style={{ fontFamily: 'Noto Sans Devanagari, serif' }}>
+            <motion.div
+                className="relative z-10 flex flex-col items-center mt-4 md:mt-6"
+                initial={{ opacity: 0, y: -20 }}
+                animate={hasEntered ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+                transition={{ duration: 2.5, delay: hasEntered ? 0.5 : 0 }}
+            >
+                <p className="text-[#8B7355] text-xs md:text-sm opacity-60 text-center leading-relaxed" style={{ fontFamily: 'Noto Sans Devanagari, serif' }}>
                     वक्रतुंड महाकाय सूर्यकोटि समप्रभ।<br />
                     निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
                 </p>
-                <p className="text-[#8B7355] text-sm md:text-base mt-3 opacity-60" style={{ fontFamily: 'Noto Sans Devanagari, serif' }}>
+                <Ganesh className="w-12 h-12 md:w-16 md:h-16 text-[#8B7355] opacity-70 my-2" />
+                <p className="text-[#8B7355] text-sm md:text-base opacity-60" style={{ fontFamily: 'Noto Sans Devanagari, serif' }}>
                     ||  श्री गणेशाय नमः ||
                 </p>
             </motion.div>
 
-            <motion.div style={{ y, opacity }} className="relative z-30 text-center max-w-4xl mx-auto">
-                <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 2.5, ease: 'easeOut', delay: 0.5 }} className="mb-8">
-                    <p className="text-[#6B6B6B] text-lg md:text-xl tracking-[0.2em] uppercase mb-4 font-serif text-center">
+            <motion.div style={{ y, opacity }} className="relative z-30 text-center max-w-4xl mx-auto flex-1 flex flex-col justify-center -mt-8 md:mt-0">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={hasEntered ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 2.5, ease: 'easeOut', delay: hasEntered ? 0.5 : 0 }}
+                    className="mb-4 md:mb-6"
+                >
+                    <p className="text-[#6B6B6B] text-base md:text-xl tracking-[0.2em] uppercase mb-2 font-serif text-center">
                         Wedding Reception Invitation
                     </p>
                 </motion.div>
 
-                <div className="relative py-12">
-                    <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, duration: 2 }} className="text-7xl md:text-9xl text-[#4A4A4A] font-script leading-tight z-10 relative drop-shadow-sm text-center">
+                <div className="relative py-6 md:py-8">
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={hasEntered ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                        transition={{ delay: hasEntered ? 1.2 : 0, duration: 2 }}
+                        className="text-6xl md:text-7xl lg:text-9xl text-[#4A4A4A] font-script leading-tight z-10 relative drop-shadow-sm text-center"
+                    >
                         Bishwas & Shruti
                     </motion.h1>
                     <WatercolorWash variant="green" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] -z-10 opacity-15 rotate-12" />
                 </div>
 
-                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2, duration: 1.5 }} className="text-[#6B6B6B] text-xl md:text-2xl font-serif italic mt-8 max-w-2xl mx-auto text-center">
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={hasEntered ? { opacity: 1 } : { opacity: 0 }}
+                    transition={{ delay: hasEntered ? 2 : 0, duration: 1.5 }}
+                    className="text-[#6B6B6B] text-base md:text-xl lg:text-2xl font-serif italic mt-6 md:mt-8 max-w-2xl mx-auto text-center px-4"
+                >
                     With immense joy and heartfelt gratitude, we request the pleasure of your company
                 </motion.p>
             </motion.div>
 
-            <motion.div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30" animate={{ y: [0, 10, 0], opacity: [0.5, 1, 0.5] }} transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}>
-                <div className="w-px h-24 bg-gradient-to-b from-[#9DC183] to-transparent" />
+            <motion.div
+                className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-30"
+                animate={hasEntered ? { y: [0, 8, 0], opacity: [0.5, 1, 0.5] } : { opacity: 0 }}
+                transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
+            >
+                <div className="w-px h-12 md:h-20 bg-gradient-to-b from-[#9DC183] to-transparent" />
             </motion.div>
         </section>
     );
 };
+
