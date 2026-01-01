@@ -68,7 +68,7 @@ export function EntranceOverlay({ onEnter }) {
                         </motion.div>
 
                         <motion.p
-                            className="text-[#8B7355] text-lg md:text-xl mt-6 text-center opacity-80"
+                            className="text-[#8B7355] text-lg md:text-xl mt-4 text-center opacity-80"
                             style={{ fontFamily: 'Noto Sans Devanagari, serif' }}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -78,24 +78,42 @@ export function EntranceOverlay({ onEnter }) {
                         </motion.p>
 
                         <motion.p
-                            className="text-[#6B6B6B] text-base md:text-lg mt-8 text-center font-serif italic"
+                            className="text-[#6B6B6B] text-sm md:text-base mt-10 text-center font-serif tracking-widest uppercase opacity-60"
                             initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
+                            animate={{ opacity: 0.6 }}
+                            transition={{ delay: 1, duration: 1 }}
+                        >
+                            Welcome to
+                        </motion.p>
+
+                        <motion.h1
+                            className="text-4xl md:text-5xl text-[#4A4A4A] font-script mt-3 text-center"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 1.2, duration: 1 }}
                         >
-                            Welcome to our celebration of love
+                            Bishwas & Shruti's
+                        </motion.h1>
+
+                        <motion.p
+                            className="text-[#6B6B6B] text-lg md:text-xl mt-2 text-center font-serif tracking-wide"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 1.4, duration: 1 }}
+                        >
+                            Wedding Celebration
                         </motion.p>
 
                         <motion.button
                             onClick={handleEnter}
-                            className="mt-10 px-8 py-4 rounded-full cursor-pointer relative overflow-hidden group"
+                            className="mt-12 px-8 py-4 rounded-full cursor-pointer relative overflow-hidden group"
                             style={{
                                 background: 'linear-gradient(135deg, #FFD700 0%, #FF9933 50%, #FFD700 100%)',
                                 boxShadow: '0 4px 20px rgba(255, 153, 51, 0.4)'
                             }}
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 1.5, duration: 0.6 }}
+                            transition={{ delay: 1.8, duration: 0.6 }}
                             whileHover={{ scale: 1.05, boxShadow: '0 6px 30px rgba(255, 153, 51, 0.6)' }}
                             whileTap={{ scale: 0.95 }}
                         >
@@ -141,10 +159,10 @@ export function EntranceOverlay({ onEnter }) {
                         </motion.button>
 
                         <motion.p
-                            className="text-[#8B7355] text-xs md:text-sm mt-4 text-center opacity-50"
+                            className="text-[#8B7355] text-xs md:text-sm mt-5 text-center opacity-50"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 0.5 }}
-                            transition={{ delay: 2, duration: 1 }}
+                            transition={{ delay: 2.2, duration: 1 }}
                         >
                             Click to enter and play background music
                         </motion.p>
