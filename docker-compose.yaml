@@ -1,0 +1,18 @@
+services:
+  wedding-archive:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PORT: 8016
+    ports:
+      - "8016:8016"
+    environment:
+      - PORT=8016
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8016 || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
