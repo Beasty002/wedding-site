@@ -1,0 +1,52 @@
+name: CI Workflow
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+      runs-on: ubuntu-latest
+      if: github.ref == 'refs/heads/main'  # Only deploy on main branch
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Deploy to EC2
+          uses: appleboy/ssh-action@v0.1.7
+          with:
+            host: ${{ secrets.EC2_HOST }}
+            username: ${{ secrets.EC2_USERNAME }}
+            key: ${{ secrets.EC2_SSH_KEY }}
+            script: |
+              set -e  # Exit on any error
+
+              echo "🚀 Starting deployment..."
+
+              # Navigate to your project directory
+              cd ~/codex/frontend/wedding-archive
+
+              # Pull latest changes
+              echo "📥 Pulling latest code..."
+              git pull origin main
+              # Stop and remove old containers
+              echo "🛑 Stopping old containers..."
+              docker-compose down || true
+
+              # Build new images
+              echo "🏗️ Building new Docker images..."
+              docker-compose build
+
+              # Start new containers
+              echo "🚀 Starting new containers..."
+              docker-compose up -d
+
+              # Verify deployment
+              echo "✅ Checking container status..."
+              docker ps
+
+              echo "🎉 Deployment completed successfully!"
