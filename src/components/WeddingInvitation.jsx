@@ -21,12 +21,12 @@ export function WeddingInvitation() {
     };
 
     return (
-        <div className="w-full bg-[#FFFFF0] overflow-x-hidden">
+        <div className="w-full min-h-0 bg-[#FFFFF0] overflow-x-hidden">
             {!hasEntered && <EntranceOverlay onEnter={handleEnter} />}
             <MusicPlayer audioRef={audioRef} isInitiallyPlaying={hasEntered} />
             <HeroSection hasEntered={hasEntered} />
             <FamilySection />
-            <EventDetailsSection />
+            {/* <EventDetailsSection /> */}
             <NoteSection />
             <FooterSection />
         </div>

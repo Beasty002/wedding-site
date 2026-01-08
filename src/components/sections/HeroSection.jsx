@@ -26,7 +26,7 @@ export const HeroSection = ({ hasEntered }) => {
     const opacity = useTransform(scrollY, [0, 800], [1, 0]);
 
     return (
-        <section className="relative h-screen flex flex-col items-center overflow-hidden px-4 py-4 bg-[#FFFFF0]">
+        <section className="relative h-[100dvh] flex flex-col items-center overflow-hidden px-4 py-4 bg-[#FFFFF0]">
             <WatercolorWash variant="pink" className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none" />
             <PetalBackground hasEntered={hasEntered} />
 
@@ -101,18 +101,40 @@ export const HeroSection = ({ hasEntered }) => {
                     initial={{ opacity: 0 }}
                     animate={hasEntered ? { opacity: 1 } : { opacity: 0 }}
                     transition={{ delay: hasEntered ? 2 : 0, duration: 1.5 }}
-                    className="text-[#6B6B6B] text-base md:text-xl lg:text-2xl font-serif italic mt-6 md:mt-8 max-w-2xl mx-auto text-center px-4"
+                    className="text-[#6B6B6B] text-sm md:text-base lg:text-lg font-serif italic mt-6 md:mt-8 max-w-2xl mx-auto text-center px-4"
                 >
-                    With immense joy and heartfelt gratitude, we request the pleasure of your company
+                    With immense joy and heartfelt gratitude,<br />
+                    we request the pleasure of your company for the wedding reception of Bishwas & Shruti
                 </motion.p>
             </motion.div>
 
             <motion.div
-                className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-30"
-                animate={hasEntered ? { y: [0, 8, 0], opacity: [0.5, 1, 0.5] } : { opacity: 0 }}
-                transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
+                className="absolute bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1 cursor-pointer"
+                initial={{ opacity: 0 }}
+                animate={hasEntered ? { opacity: 0.6 } : { opacity: 0 }}
+                transition={{ delay: hasEntered ? 3 : 0, duration: 1 }}
+                whileInView={{ opacity: hasEntered ? 0.6 : 0 }}
+                viewport={{ once: false }}
+                onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+                whileHover={{ scale: 1.1, opacity: 1 }}
+                whileTap={{ scale: 0.95 }}
             >
-                <div className="w-px h-12 md:h-20 bg-gradient-to-b from-[#9DC183] to-transparent" />
+                <motion.div
+                    className="flex flex-col items-center"
+                    animate={{ y: [0, 6, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                    <div className="w-5 h-8 border-2 border-[#8B7355]/40 rounded-full flex justify-center pt-1.5">
+                        <motion.div
+                            className="w-1.5 h-1.5 bg-[#8B7355]/60 rounded-full"
+                            animate={{ y: [0, 10, 0], opacity: [0.8, 0.2, 0.8] }}
+                            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                        />
+                    </div>
+                </motion.div>
+                <span className="text-[#8B7355]/50 text-[10px] md:text-xs tracking-[0.2em] uppercase font-serif mt-2">
+                    Scroll Down
+                </span>
             </motion.div>
         </section>
     );
