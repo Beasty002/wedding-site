@@ -180,21 +180,6 @@ export function EntranceOverlay({ onEnter }) {
                             Click to enter and play background music
                         </motion.p>
 
-                        {/* Bouncing hand pointer - below text */}
-                        <motion.div
-                            className="mt-3"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 0.7 }}
-                            transition={{ delay: 2.5, duration: 0.8 }}
-                        >
-                            <motion.div
-                                animate={{ y: [0, -5, 0] }}
-                                transition={{ duration: 1, repeat: Infinity, ease: 'easeInOut' }}
-                                className="flex justify-center"
-                            >
-                                <span className="text-2xl">👆</span>
-                            </motion.div>
-                        </motion.div>
                     </motion.div>
                 </motion.div>
             )}
